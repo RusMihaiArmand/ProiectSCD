@@ -15,10 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
-/**
- * @author Radu Miron
- * @version 1
- */
 
 @Entity
 @SequenceGenerator(name = "POSITION_ID_SQ", sequenceName = "POSITION_ID_SQ", allocationSize = 1)
@@ -48,21 +44,3 @@ public class Position {
     private Date creationDate;
 }
 
-//@Entity
-//@Data
-//public class Position {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-//    private Integer id;
-//
-//    private String latitude;
-//    private String longitude;
-//    private String terminalId;
-//
-//    @Column(updatable = false, nullable = false)
-//    @CreationTimestamp
-//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-//    private Date creationDate;
-//}

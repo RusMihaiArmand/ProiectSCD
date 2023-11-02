@@ -16,24 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Radu Miron
- * @version 1
- */
-@RestController // creates an instance of the current class
-@RequestMapping("/positions") // maps the requests starting with '/positions' to this controller
+
+@RestController
+@RequestMapping("/positions")
 public class PositionController {
 
-  @Autowired // creates the injection of PositionService instance
+  @Autowired
   private PositionService positionService;
 
-  //@Operation(summary = "Save a new position")
-//    @PostMapping // maps the '/positions' POST requests to this method
-//    public Position create(@RequestBody PositionDTO position) {
-//        return positionService.create(position);
-//    }
 
-  @GetMapping // maps the '/positions' POST requests to this method
+
+  @GetMapping
   public ResponseEntity<List<PositionDTO>> getAll(
       @RequestParam(name = "idTerminal", required = false) String idTermPar,
       @RequestParam(name = "startDate", required = false) String startPar,
@@ -42,8 +35,8 @@ public class PositionController {
     return ResponseEntity.ok(positionService.getPositions(idTermPar, startPar, endPar));
   }
 
-  // @Operation(summary = "Save a new position")
-  @PostMapping // maps the '/positions' POST requests to this method
+
+  @PostMapping
   public ResponseEntity<Void> create(@RequestBody PositionData position) {
 
     positionService.create(position);
