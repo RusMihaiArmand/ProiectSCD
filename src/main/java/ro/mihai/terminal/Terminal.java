@@ -15,7 +15,6 @@ import ro.mihai.position.*;
 import java.util.List;
 
 
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,16 +23,15 @@ import java.util.List;
 @Table(name = "TERMINAL")
 public class Terminal {
 
-    @Id // PK
-    @Column(name = "ID")
-    private String id;
+  @Id // PK
+  @Column(name = "ID")
+  private String id;
 
-    @Column(name = "NAME")
-    private String terminalName;
+  @Column(name = "NAME")
+  private String terminalName;
 
 
-
-    @OneToMany(mappedBy = "terminal")
-    private List<Position> positions;
+  @OneToMany(mappedBy = "terminal")
+  private List<Position> positions;
 
 }

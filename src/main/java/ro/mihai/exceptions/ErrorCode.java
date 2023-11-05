@@ -14,7 +14,8 @@ public enum ErrorCode {
   POSITION_NOT_FOUND("ERR-004", "Position does not exist.", HttpStatus.BAD_REQUEST),
   CANNOT_DELETE_TERMINAL("ERR-005", "Terminal has positions. Cannot delete.", HttpStatus.BAD_REQUEST),
   USERNAME_IN_USE("ERR-006", "Username already exists.", HttpStatus.BAD_REQUEST),
-  SAME_PASSWORD("ERR-007", "New password cannot be old password.", HttpStatus.BAD_REQUEST);
+  SAME_PASSWORD("ERR-007", "New password cannot be old password.", HttpStatus.BAD_REQUEST),
+  TERMINAL_ID_EXISTS("ERR-008", "This terminal id is already in use.", HttpStatus.BAD_REQUEST);
 
   private final String errorCode;
   private final String devMsg;
