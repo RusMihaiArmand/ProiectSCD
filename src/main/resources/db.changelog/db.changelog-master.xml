@@ -10,6 +10,18 @@
     </changeSet>
 
     <changeSet author="mihai.rus" id="001">
+
+        <createTable tableName="TERMINAL" >
+            <column name="ID" remarks="PK" type="VARCHAR2(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TERMINAL_PK"/>
+            </column>
+
+            <column name="NAME" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
         <createTable tableName="POSITION" >
             <column name="ID" remarks="Generated surrogate key." type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="POSITION_PK"/>
@@ -20,9 +32,13 @@
             <column name="LONGITUDE" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
+
             <column name="TERMINAL_ID" type="VARCHAR2(255)">
-                <constraints nullable="false"/>
+                <constraints foreignKeyName="POSITION_TERMINAL_FK"
+                  nullable="false"
+                  references="TERMINAL(ID)"/>
             </column>
+
             <column name="CREATION_DATE" type="DATE">
                 <constraints nullable="false"/>
             </column>
@@ -32,12 +48,33 @@
 
 
 
+        <createTable tableName="USERS" >
+            <column name="USERNAME" remarks="PK" type="VARCHAR2(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="USER_PK"/>
+            </column>
+
+            <column name="PASSWORD" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+
     </changeSet>
 
 
     <changeSet author="mihai.rus" id="002">
+
+        <comment>Load some terminals</comment>
+        <loadData file="includes/terminals-initial-load.csv" tableName="TERMINAL"
+          relativeToChangelogFile="true"/>
+
         <comment>Load some positions</comment>
         <loadData file="includes/positions-initial-load.csv" tableName="POSITION"
+          relativeToChangelogFile="true"/>
+
+        <comment>Load some users</comment>
+        <loadData file="includes/users-initial-load.csv" tableName="USERS"
           relativeToChangelogFile="true"/>
 
     </changeSet>

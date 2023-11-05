@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ro.mihai.exceptions.CodeException;
+import ro.mihai.exceptions.ErrorCode;
+import ro.mihai.terminal.Terminal;
+import ro.mihai.terminal.TerminalRepository;
 
 
 @Service
@@ -17,6 +21,9 @@ public class PositionService {
 
   @Autowired
   private PositionRepository positionRepository;
+
+  @Autowired
+  private TerminalRepository terminalRepository;
 
 
   public List<PositionDTO> getPositions(String terminalIdParam, String startDateParam,
@@ -59,6 +66,8 @@ public class PositionService {
       );
 
     } else {
+
+
       return (positions.stream()
           .filter(position -> position.getCreationDate().toInstant()
               .atZone(ZoneId.systemDefault())
@@ -66,12 +75,27 @@ public class PositionService {
               position.getCreationDate().toInstant()
                   .atZone(ZoneId.systemDefault())
                   .toLocalDate().isAfter(finalStartDate) &&
-              position.getTerminalId().toString().equals(terminalIdParam)
+              position.getTerminal().getId().toString().equals(terminalIdParam)
 
           )
           .map(PositionMapper.INSTANCE::mapPositionEtyToPositionDto)
           .collect(Collectors.toList())
       );
+
+
+//      return (positions.stream()
+//          .filter(position -> position.getCreationDate().toInstant()
+//              .atZone(ZoneId.systemDefault())
+//              .toLocalDate().isBefore(finalEndDate) &&
+//              position.getCreationDate().toInstant()
+//                  .atZone(ZoneId.systemDefault())
+//                  .toLocalDate().isAfter(finalStartDate) &&
+//              position.getTerminalId().toString().equals(terminalIdParam)
+//
+//          )
+//          .map(PositionMapper.INSTANCE::mapPositionEtyToPositionDto)
+//          .collect(Collectors.toList())
+//      );
     }
 
 
@@ -79,28 +103,37 @@ public class PositionService {
 
 
   @Transactional()
-  public void create(PositionData positionData) {
+  public void create(PositionData positionData) throws Exception {
 
     Position toSave = new Position();
 
     toSave.setCreationDate(Date.from(Instant.now()));
     toSave.setLatitude(positionData.getLatitude());
     toSave.setLongitude(positionData.getLongitude());
-    toSave.setTerminalId(positionData.getTerminalId());
+
+    //toSave.setTerminalId(positionData.getTerminalId());
+    Terminal terminal = loadTerminalById(positionData.getTerminalId());
+    toSave.setTerminal(terminal);
 
 
     PositionMapper.INSTANCE.mapPositionEtyToPositionDto(positionRepository.save(toSave));
   }
 
   @Transactional
-  public PositionDTO edit(Integer id, PositionData updateData) {
+  public PositionDTO edit(Integer id, PositionData updateData) throws Exception {
 
-    Position pos = positionRepository.findById(id).
-        orElseThrow();
+    Position pos = positionRepository.findById(id)
+        .orElseThrow(() -> new CodeException(
+            CodeException.CodeExceptionElement.builder()
+                .errorDescription(ErrorCode.POSITION_NOT_FOUND).build()));
 
     pos.setLatitude(updateData.getLatitude());
     pos.setLongitude(updateData.getLongitude());
-    pos.setTerminalId(updateData.getTerminalId());
+
+
+
+    Terminal terminal = loadTerminalById(updateData.getTerminalId());
+    pos.setTerminal(terminal);
 
     return PositionMapper.INSTANCE.mapPositionEtyToPositionDto(positionRepository
         .save(pos));
@@ -110,8 +143,21 @@ public class PositionService {
   @Transactional
   public void delete(Integer id) {
 
+    positionRepository.findById(id)
+        .orElseThrow(() -> new CodeException(
+        CodeException.CodeExceptionElement.builder()
+            .errorDescription(ErrorCode.POSITION_NOT_FOUND).build()));
+
     positionRepository.deleteById(id);
-
-
   }
+
+
+
+  public Terminal loadTerminalById(String id) throws Exception {
+    return terminalRepository.findById(id)
+        .orElseThrow(() -> new CodeException(
+            CodeException.CodeExceptionElement.builder()
+                .errorDescription(ErrorCode.TERMINAL_NOT_FOUND).build()));
+  }
+
 }

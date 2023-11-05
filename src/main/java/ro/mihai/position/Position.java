@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import ro.mihai.terminal.Terminal;
 
 
 @Entity
@@ -35,8 +38,12 @@ public class Position {
     private String latitude;
     @Column(name = "LONGITUDE")
     private String longitude;
-    @Column(name = "TERMINAL_ID")
-    private String terminalId;
+//    @Column(name = "TERMINAL_ID")
+//    private String terminalId;
+
+    @ManyToOne
+    @JoinColumn(name = "TERMINAL_ID")
+    private Terminal terminal;
 
     @Column(updatable = false, nullable = false, name="CREATION_DATE")
     @CreationTimestamp

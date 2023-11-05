@@ -2,6 +2,7 @@ package ro.mihai.position;
 
 import java.util.Date;
 import lombok.Data;
+import ro.mihai.terminal.TerminalDTO;
 
 @Data
 public class PositionDTO {
@@ -13,7 +14,9 @@ public class PositionDTO {
 
   private String longitude;
 
-  private String terminalId;
+  //private String terminalId;
+
+  private TerminalDTO terminalData;
 
   private Date creationDate;
 }

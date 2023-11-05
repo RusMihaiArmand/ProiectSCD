@@ -1,8 +1,15 @@
 package ro.mihai.security;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ro.mihai.exceptions.CodeException;
+import ro.mihai.exceptions.ErrorCode;
+import ro.mihai.user.User;
+import ro.mihai.user.UserService;
 
 /**
  * @author Radu Miron
@@ -10,17 +17,40 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController // creates an instance of the current class
 @RequestMapping("/login") // maps the requests starting with '/login' to this controller
+@RequiredArgsConstructor
 public class LoginController {
 
+
+    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+
+
     @PostMapping
-    public JwtTokenDTO login(CredentialsDTO credentialsDTO) {
-        // todo: validate credentials; you need to create a User entity and save users in DB;
-        // the users should have at least the 'username' and the 'password' fields;
-        // the password should be encrypted with BCrypt before saving it into the DB.
-        // at the moment this endpoint returns a valid token for any credentials;
-        // return the token if credentials are valid; throw UnauthorizedException otherwise
-        JwtTokenDTO jwtTokenDTO = new JwtTokenDTO();
-        jwtTokenDTO.setToken(JwtUtil.generateToken(credentialsDTO.getUsername()));
-        return jwtTokenDTO;
+    public JwtTokenDTO login(@RequestBody CredentialsDTO credentialsDTO) throws Exception {
+
+//        String encodedPass;
+//        encodedPass = passwordEncoder.encode("1234");
+//        System.out.println(encodedPass);
+
+
+        String usName = credentialsDTO.getUsername();
+        User user = userService.getUserByUsername(usName);
+
+        String usPass = credentialsDTO.getPassword();
+
+        if(passwordEncoder.matches(usPass, user.getPassword()))
+        {
+            JwtTokenDTO jwtTokenDTO = new JwtTokenDTO();
+            jwtTokenDTO.setToken(JwtUtil.generateToken(credentialsDTO.getUsername()));
+            return jwtTokenDTO;
+        }
+        else
+        {
+            throw new CodeException(
+                CodeException.CodeExceptionElement.builder()
+                    .errorDescription(ErrorCode.PASSWORD_NOT_MATCHING).build());
+        }
+
+
     }
 }

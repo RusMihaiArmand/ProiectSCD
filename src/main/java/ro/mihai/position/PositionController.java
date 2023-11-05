@@ -37,7 +37,7 @@ public class PositionController {
 
 
   @PostMapping
-  public ResponseEntity<Void> create(@RequestBody PositionData position) {
+  public ResponseEntity<Void> create(@RequestBody PositionData position) throws Exception {
 
     positionService.create(position);
 
@@ -46,7 +46,7 @@ public class PositionController {
 
   @PutMapping(value = "/{id}")
   public ResponseEntity<Void> edit(@PathVariable Integer id,
-      @RequestBody PositionData positionData) {
+      @RequestBody PositionData positionData) throws Exception {
 
     positionService.edit(id, positionData);
     return ResponseEntity.noContent().build();
