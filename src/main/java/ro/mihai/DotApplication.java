@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DotApplication {
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-
-		SpringApplication.run(DotApplication.class, args);
-	}
+    SpringApplication.run(DotApplication.class, args);
+  }
 
 }

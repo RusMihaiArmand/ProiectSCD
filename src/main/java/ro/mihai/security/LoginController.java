@@ -1,5 +1,6 @@
 package ro.mihai.security;
 
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +12,9 @@ import ro.mihai.exceptions.ErrorCode;
 import ro.mihai.user.User;
 import ro.mihai.user.UserService;
 
-/**
- * @author Radu Miron
- * @version 1
- */
-@RestController // creates an instance of the current class
-@RequestMapping("/login") // maps the requests starting with '/login' to this controller
+
+@RestController
+@RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
 
@@ -26,7 +24,7 @@ public class LoginController {
 
 
     @PostMapping
-    public JwtTokenDTO login(@RequestBody CredentialsDTO credentialsDTO) throws Exception {
+    public JwtTokenDTO login(@Valid @RequestBody CredentialsDTO credentialsDTO) throws Exception {
 
 //        String encodedPass;
 //        encodedPass = passwordEncoder.encode("1234");

@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ErrorDetail {
+
   private String message;
   private String errorCode;
   private Map<String, Object> contextVariables;

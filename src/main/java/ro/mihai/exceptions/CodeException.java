@@ -8,7 +8,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CodeException extends RuntimeException {
+
   private final CodeExceptionElement error;
+
   public CodeException(Throwable cause, CodeExceptionElement error) {
     super(cause);
     this.error = error;

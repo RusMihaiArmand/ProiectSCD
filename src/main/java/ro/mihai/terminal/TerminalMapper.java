@@ -12,6 +12,7 @@ public interface TerminalMapper {
   TerminalMapper INSTANCE = Mappers.getMapper(TerminalMapper.class);
 
   TerminalDTO mapTerminalEtyToTerminalDto(Terminal terminalEty);
+
   @Mapping(target = "positions", ignore = true)
   Terminal mapTerminalDtoToTerminalEty(TerminalDTO terminalDTO);
 }

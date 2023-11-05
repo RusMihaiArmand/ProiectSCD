@@ -28,26 +28,24 @@ import ro.mihai.terminal.Terminal;
 @Table(name = "POSITION")
 public class Position {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POSITION_ID_SQ")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(name = "ID")
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POSITION_ID_SQ")
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  @Column(name = "ID")
+  private Integer id;
 
-    @Column(name = "LATITUDE")
-    private String latitude;
-    @Column(name = "LONGITUDE")
-    private String longitude;
-//    @Column(name = "TERMINAL_ID")
-//    private String terminalId;
+  @Column(name = "LATITUDE")
+  private String latitude;
+  @Column(name = "LONGITUDE")
+  private String longitude;
 
-    @ManyToOne
-    @JoinColumn(name = "TERMINAL_ID")
-    private Terminal terminal;
+  @ManyToOne
+  @JoinColumn(name = "TERMINAL_ID")
+  private Terminal terminal;
 
-    @Column(updatable = false, nullable = false, name="CREATION_DATE")
-    @CreationTimestamp
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date creationDate;
+  @Column(updatable = false, nullable = false, name = "CREATION_DATE")
+  @CreationTimestamp
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  private Date creationDate;
 }
 

@@ -3,7 +3,6 @@ package ro.mihai.position;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class PositionService {
 
   public List<PositionDTO> getPositions(String terminalIdParam, String startDateParam,
       String endDateParam) {
-    //Date startDate, endDate;
+
     LocalDate startDate, endDate;
     try {
       startDate = LocalDate.parse(startDateParam);
@@ -42,12 +41,7 @@ public class PositionService {
       endDate = LocalDate.now().plusYears(1);
     }
 
-
-    List<PositionDTO> dtoList = new ArrayList<>();
-
     List<Position> positions = positionRepository.findAll();
-
-
 
     LocalDate finalEndDate = endDate, finalStartDate = startDate;
     if (terminalIdParam == null) {
@@ -67,7 +61,6 @@ public class PositionService {
 
     } else {
 
-
       return (positions.stream()
           .filter(position -> position.getCreationDate().toInstant()
               .atZone(ZoneId.systemDefault())
@@ -75,35 +68,18 @@ public class PositionService {
               position.getCreationDate().toInstant()
                   .atZone(ZoneId.systemDefault())
                   .toLocalDate().isAfter(finalStartDate) &&
-              position.getTerminal().getId().toString().equals(terminalIdParam)
+              position.getTerminal().getId().equals(terminalIdParam)
 
           )
           .map(PositionMapper.INSTANCE::mapPositionEtyToPositionDto)
           .collect(Collectors.toList())
       );
-
-
-//      return (positions.stream()
-//          .filter(position -> position.getCreationDate().toInstant()
-//              .atZone(ZoneId.systemDefault())
-//              .toLocalDate().isBefore(finalEndDate) &&
-//              position.getCreationDate().toInstant()
-//                  .atZone(ZoneId.systemDefault())
-//                  .toLocalDate().isAfter(finalStartDate) &&
-//              position.getTerminalId().toString().equals(terminalIdParam)
-//
-//          )
-//          .map(PositionMapper.INSTANCE::mapPositionEtyToPositionDto)
-//          .collect(Collectors.toList())
-//      );
     }
-
-
   }
 
 
   @Transactional()
-  public void create(PositionData positionData) throws Exception {
+  public void create(PositionData positionData) {
 
     Position toSave = new Position();
 
@@ -111,16 +87,14 @@ public class PositionService {
     toSave.setLatitude(positionData.getLatitude());
     toSave.setLongitude(positionData.getLongitude());
 
-    //toSave.setTerminalId(positionData.getTerminalId());
     Terminal terminal = loadTerminalById(positionData.getTerminalId());
     toSave.setTerminal(terminal);
-
 
     PositionMapper.INSTANCE.mapPositionEtyToPositionDto(positionRepository.save(toSave));
   }
 
   @Transactional
-  public PositionDTO edit(Integer id, PositionData updateData) throws Exception {
+  public void edit(Integer id, PositionData updateData) {
 
     Position pos = positionRepository.findById(id)
         .orElseThrow(() -> new CodeException(
@@ -130,13 +104,10 @@ public class PositionService {
     pos.setLatitude(updateData.getLatitude());
     pos.setLongitude(updateData.getLongitude());
 
-
-
     Terminal terminal = loadTerminalById(updateData.getTerminalId());
     pos.setTerminal(terminal);
 
-    return PositionMapper.INSTANCE.mapPositionEtyToPositionDto(positionRepository
-        .save(pos));
+    PositionMapper.INSTANCE.mapPositionEtyToPositionDto(positionRepository.save(pos));
 
   }
 
@@ -145,15 +116,14 @@ public class PositionService {
 
     positionRepository.findById(id)
         .orElseThrow(() -> new CodeException(
-        CodeException.CodeExceptionElement.builder()
-            .errorDescription(ErrorCode.POSITION_NOT_FOUND).build()));
+            CodeException.CodeExceptionElement.builder()
+                .errorDescription(ErrorCode.POSITION_NOT_FOUND).build()));
 
     positionRepository.deleteById(id);
   }
 
 
-
-  public Terminal loadTerminalById(String id) throws Exception {
+  public Terminal loadTerminalById(String id) {
     return terminalRepository.findById(id)
         .orElseThrow(() -> new CodeException(
             CodeException.CodeExceptionElement.builder()

@@ -1,13 +1,15 @@
 package ro.mihai.security;
 
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
-/**
- * @author Radu Miron
- * @version 1
- */
+
 @Data
 public class CredentialsDTO {
-    private String username;
-    private String password;
+
+  @NotEmpty(message = "No username provided")
+  private String username;
+
+  @NotEmpty(message = "No password provided")
+  private String password;
 }
