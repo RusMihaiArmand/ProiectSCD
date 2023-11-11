@@ -30,6 +30,9 @@ spring:
     default-property-inclusion: non_absent
     serialization:
       write-dates-as-timestamps: false
+  mvc:
+    format:
+      date: "yyyy-MM-dd HH:mm:ss"
 
 
 #  security:
@@ -45,4 +48,15 @@ server.port: 8081
 #    contextPath: /core
 
 
+
+logging:
+  file:
+    name: logs/serverapp.log
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB
+      file-name-pattern: logs/serverapp.%d{yyyy-MM-dd}.%i.log
+
+  #request parameters date formatting
 
