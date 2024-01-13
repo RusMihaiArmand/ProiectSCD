@@ -21,7 +21,7 @@ public class LoginController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-
+    
 
     @PostMapping
     public JwtTokenDTO login(@Valid @RequestBody CredentialsDTO credentialsDTO) throws Exception {

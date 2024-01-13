@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/terminal.js"></script>
+    </head>
+
+
+    <body class="backTerminal">
+        <h1 class="titleTerminal" align="center">Terminal Page</h1>
+
+        <div class="divTerminal" id="terminalForm" align="center"><br><br><br>
+
+            <label class="labelTerminal">ID</label>
+            <input class="inputTerminal" type="text" id="terminalID"><br><br><br><br>
+
+            <label class="labelTerminal">Terminal Name</label>
+            <input class="inputTerminal" type="text" id="terminalName"><br><br><br><br>
+
+            <button class="buttonTerminal" onclick="createTerminal(document.getElementById('terminalID').value, document.getElementById('terminalName').value)">
+                Create New
+            </button>
+
+            <br><br>
+
+            <button class="buttonTerminal" onclick="deleteTerminal(document.getElementById('terminalID').value)">DELETE</button>
+
+            <br><br>
+            <button class="buttonTerminal" onclick="window.location.href='map.html'">Map</button>
+        </div>
+
+
+    </body>
+</html>

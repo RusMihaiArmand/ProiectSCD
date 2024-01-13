@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>The Map</title>
+    <style>
+        #mapdiv {
+            width: 700px;
+            height: 600px;
+            align-content: center;
+        }
+    </style>
+  <link rel="stylesheet" href="styles/style.css" />
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/position.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body class="backMap">
+<h1 class="titleMap" align="center">Map View</h1>
+<br>
+
+  <div class="divMap" id align="center">
+
+    <br>
+
+    <form id="mapForm">
+      <label class="labelMap">Terminal ID</label>
+      <input class="inputMap" type="text" id="terminalID" name="terminalID" ><br><br>
+
+
+      <label class="labelMap">Start Date</label>
+      <input class="inputMap" type="text" id="startDate" name="startDate"  value="2023-01-21"><br><br>
+
+
+      <label class="labelMap">End Date</label>
+      <input class="inputMap" type="text" id="endDate" name="endDate"  value="2024-01-21"><br><br>
+
+
+      <input class="buttonMap" type="button" id="get_positions_button" size="35" value="Get Positions"
+             onclick=getPositions()>
+
+      <input class="buttonMap" type="button" size="35" value="CLEAN MARKERS" onclick=cleanMarkers()>
+
+      <br><br>
+
+      <input class="buttonMap" type="button"  value="Go to terminal page"
+             onclick="window.location.href='terminalPage.html'">
+
+
+    </form>
+
+
+
+  </div>
+
+
+  <br><br>
+  <div class="theMap" id="mapdiv"></div>
+
+<script>
+    initializeMap();
+</script>
+</body>
+</html>

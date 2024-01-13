@@ -17,6 +17,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
   // the following resources don't need to be authorized
   private static final String[] AUTH_EXCEPTIONS = {
+
       // login endpoint
       "POST /login",
 
@@ -71,7 +72,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     String requestUrl = request.getRequestURI();
     String requestMethod = request.getMethod();
 
-    return Arrays.stream(AUTH_EXCEPTIONS)
-        .anyMatch(s -> (requestMethod + " " + requestUrl).startsWith(s));
+    //System.out.println("URL === " + requestUrl);
+
+//    return (requestUrl.equals("/") && requestMethod.equals("GET"))
+//            || Arrays.stream(AUTH_EXCEPTIONS).anyMatch(s -> (requestMethod + " " + requestUrl).startsWith(s));
+
+    return ( requestMethod.equals("GET"))
+        || Arrays.stream(AUTH_EXCEPTIONS).anyMatch(s -> (requestMethod + " " + requestUrl).startsWith(s));
+
+//    return Arrays.stream(AUTH_EXCEPTIONS)
+//        .anyMatch(s -> (requestMethod + " " + requestUrl).startsWith(s));
   }
 }

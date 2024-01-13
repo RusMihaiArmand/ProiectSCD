@@ -1,0 +1,243 @@
+
+.labelLogIn {
+
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  font-style: normal;
+  text-transform: capitalize;
+  color: #000000;
+  background-color: #43abf8;
+  border-radius: 0.1875rem;
+  -webkit-border-radius: 0.1875rem;
+  -moz-border-radius: 0.1875rem;
+  padding: 0.7rem 1.5rem;
+  border-style: none;
+  border-width: 0rem;
+  border-color: #EF2D56;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -box-shadow: none;
+
+
+
+}
+
+
+.inputLogIn {
+  padding: 8px;
+  font-size: 22px;
+  border-width: 4px;
+  border-color: #000000;
+  background-color: #f8f8de;
+  color: #000000;
+  border-style: double;
+  border-radius: 14px;
+
+  margin-left: 10px;
+}
+
+.divLogIn{
+
+  background-color:#8fbdc0;
+
+  border-radius:16px;
+  -moz-border-radius:16px;
+  -webkit-border-radius:16px;
+  width: 40%;
+  height: 220px;
+  margin: auto;
+
+
+  border-width: 5px;
+  border-style: solid;
+  border-color: #24135e;
+
+}
+
+.titleLogIn{
+  background-color:#1359ea;
+}
+
+
+.backLogin{
+  background-color: #bbf5f5;
+}
+
+
+
+
+
+
+
+
+.labelTerminal{
+
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  font-style: normal;
+  text-transform: capitalize;
+  color: #000000;
+  background-color: #eec8a8;
+  border-radius: 0.1875rem;
+  -webkit-border-radius: 0.1875rem;
+  -moz-border-radius: 0.1875rem;
+  padding: 0.7rem 1.5rem;
+  border-style: none;
+  border-width: 0rem;
+  border-color: #EF2D56;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -box-shadow: none;
+
+
+
+}
+
+.inputTerminal {
+  padding: 8px;
+  font-size: 22px;
+  border-width: 4px;
+  border-color: #000000;
+  background-color: #f8f8de;
+  color: #000000;
+  border-style: double;
+  border-radius: 14px;
+
+  margin-left: 10px;
+
+}
+
+.buttonTerminal {
+  padding: 8px;
+  font-size: 22px;
+  border-width: 4px;
+  border-color: #000000;
+  background-color: #cda989;
+  color: #000000;
+  border-style: double;
+  border-radius: 14px;
+
+}
+
+.divTerminal{
+
+  background-color:#fbfcc9;
+
+  border-radius:16px;
+  -moz-border-radius:16px;
+  -webkit-border-radius:16px;
+  width: 40%;
+  height: 480px;
+  margin: auto;
+
+  border-width: 5px;
+  border-style: dashed;
+  border-color: #c70000;
+
+}
+
+.titleTerminal{
+  background-color:#d8a93a;
+}
+
+.backTerminal{
+  background-color: #f8d584;
+}
+
+
+
+
+.labelMap{
+
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  font-style: normal;
+  text-transform: capitalize;
+  color: #000000;
+  background-color: #bdfe96;
+  border-radius: 0.1875rem;
+  -webkit-border-radius: 0.1875rem;
+  -moz-border-radius: 0.1875rem;
+  padding: 0.7rem 1.5rem;
+  border-style: none;
+  border-width: 0rem;
+  border-color: #EF2D56;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -box-shadow: none;
+
+
+
+}
+
+.inputMap {
+  padding: 8px;
+  font-size: 22px;
+  border-width: 4px;
+  border-color: #000000;
+  background-color: #b8ddb0;
+  color: #000000;
+  border-style: double;
+  border-radius: 14px;
+  margin-left: 10px;
+
+}
+
+.buttonMap {
+  padding: 8px;
+  font-size: 22px;
+  border-width: 4px;
+  border-color: #000000;
+  background-color: #92fd51;
+  color: #000000;
+  border-style: double;
+  border-radius: 14px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.divMap{
+
+  background-color:#68eeab;
+
+  border-radius:16px;
+  -moz-border-radius:16px;
+  -webkit-border-radius:16px;
+  width: 40%;
+  height: 360px;
+  margin: auto;
+
+
+  border-width: 5px;
+  border-style: solid;
+  border-color: #343333;
+
+}
+
+.titleMap{
+  background-color:#5cc96c;
+}
+
+.theMap{
+  margin: auto;
+
+
+  border-color: #1a5227;
+  border-style: solid;
+  border-radius: 0px;
+
+}
+
+.backMap{
+  background-color: #d9f5bb;
+}

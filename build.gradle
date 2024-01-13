@@ -103,6 +103,13 @@ jar {
     enabled = true
 }
 
+bootRun {
+    systemProperties['spring.mvc.dispatch-options-request'] = 'true'
+    systemProperties['spring.devtools.restart.enabled'] = 'true'
+
+   // addResources = true
+}
+
 
 // !!!!!! vvvvvvvv
 
